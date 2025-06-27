@@ -8,6 +8,7 @@ from jose import jwt
 from datetime import datetime, timedelta, timezone
 from fastapi.security import OAuth2PasswordBearer
 from app.schemas.user import UserCreate, LoginRequest, ForgotPasswordRequest
+from typing import Union
 import os
 import json
 from passlib.context import CryptContext
@@ -89,7 +90,7 @@ def get_db():
         db.close()
 
 
-def create_access_token(data: dict, expires_delta: timedelta | None = None):
+def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None):
     to_encode = data.copy()
     expire = datetime.now(timezone.utc) + (
         expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
