@@ -1,21 +1,21 @@
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
-from app import crud, schemas
-from app.database.database import SessionLocal
+from fastapi import APIRouter
+from app import schemas
 
 router = APIRouter()
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+# Simple in-memory storage for items
+items_storage = []
+
 
 @router.get("/items", response_model=list[schemas.Item])
-def read_items(db: Session = Depends(get_db)):
-    return crud.get_items(db)
+def read_items():
+    return items_storage
+
 
 @router.post("/items", response_model=schemas.Item)
-def create_item(item: schemas.ItemCreate, db: Session = Depends(get_db)):
-    return crud.create_item(db, item)
+def create_item(item: schemas.ItemCreate):
+    new_item = schemas.Item(
+        id=len(items_storage) + 1, title=item.title, description=item.description
+    )
+    items_storage.append(new_item)
+    return new_item
