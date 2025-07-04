@@ -10,5 +10,11 @@
     "email": "user@gmail.com",
     "hashed_password": "$2b$12$EqPDkaJaoQpZ3RrK8Z6Yf.wm/r1cdF3E7oHwjvRv1dppVPBryhVCm",
     "is_active": true
+  },
+  {
+    "id": 3,
+    "email": "jawadijaz12@gmail.com",
+    "hashed_password": "$2b$12$xPJjPdrzTlmJok19i4zd9.gs.v4U2cTehbQOjNhUzQDyoEGCQTrEa",
+    "is_active": true
   }
 ]
